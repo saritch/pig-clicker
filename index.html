@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>PIG clicker</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="script" type="text/javascript" href="script.js">
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    </head>
+<body>
+    <script type="text/javascript">
+     var clicks = 0;
+     var clickValue = 1;
+
+     var betterClicksPrice = 50;
+      var autoClicksPrice = 100;
+      var autoClicksPrice2 = 1000;
+      var autoClicksPrice3 = 10000;
+      var autoClicksPrice4 = 100000;
+      const spaceBgPrice = 100;
+      const sunsetBgPrice = 100;
+      var clicksPerSecond = 0;
+
+      var clicksForAngry = 1000000;
+
+     function onClick() {
+        clicks += clickValue;
+        if (clicks > clicksForAngry) {
+          document.getElementsByClassName("btn")[0].style.backgroundImage = 'url(Haziwi-angry.png)';
+        }
+        document.getElementById("score").innerHTML = prettyNumber(clicks);
+        const sound = document.getElementById("oinkSound");
+        sound.play();
+     };
+      function openShop() {
+        const shop = document.getElementById("shopcontainer");
+        shop.style.display = 'flex';
+      }
+      function closeShop() {
+        const shop = document.getElementById("shopcontainer");
+        shop.style.display = 'none';
+      }
+
+      function showYouPoorMessage() {
+        const messageDiv = document.getElementById("messageContainer");
+          messageDiv.style.display = 'block';
+          setTimeout(function() {
+            messageDiv.style.display = 'none';
+          },1000);
+      }
+
+      function buyBetterClicks() {
+        if (clicks >= betterClicksPrice) {
+          clickValue = clickValue * 4;
+          clicks -= betterClicksPrice;
+          document.getElementById("score").innerHTML = clicks;
+          document.getElementById("clickValue").innerHTML = clickValue;
+          betterClicksPrice = betterClicksPrice * 4;
+          document.getElementById("betterClicksPrice").innerHTML = "Cost: " + betterClicksPrice;
+        } else {
+          showYouPoorMessage();
+        }
+      }
+
+      function buyAutoClicks() {
+        if (clicks >= autoClicksPrice) {
+          clicks -= autoClicksPrice;
+          document.getElementById("score").innerHTML = clicks;
+          autoClicksPrice = autoClicksPrice + 20;
+          document.getElementById("autoClicksPrice").innerHTML = "Cost: " + autoClicksPrice;
+          clicksPerSecond += 10;
+          document.getElementById("clicksPerSecond").innerHTML = clicksPerSecond;
+        } else {
+          showYouPoorMessage();
+        }
+      }
+      function buyAutoClicks2() {
+        if (clicks >= autoClicksPrice2) {
+          clicks -= autoClicksPrice2;
+          document.getElementById("score").innerHTML = clicks;
+          autoClicksPrice2 = autoClicksPrice2 + 100;
+          document.getElementById("autoClicksPrice2").innerHTML = "Cost: " + autoClicksPrice2;
+          clicksPerSecond += 100;
+          document.getElementById("clicksPerSecond").innerHTML = clicksPerSecond;
+        } else {
+          showYouPoorMessage();
+        }
+      }
+
+      function buyAutoClicks3() {
+        if (clicks >= autoClicksPrice3) {
+          clicks -= autoClicksPrice3;
+          document.getElementById("score").innerHTML = clicks;
+          autoClicksPrice3 = autoClicksPrice3 + 1000;
+          document.getElementById("autoClicksPrice3").innerHTML = "Cost: " + autoClicksPrice3;
+          clicksPerSecond += 1000;
+          document.getElementById("clicksPerSecond").innerHTML = clicksPerSecond;
+        } else {
+          showYouPoorMessage();
+        }
+      }
+      function buyAutoClicks4() {
+        if (clicks >= autoClicksPrice4) {
+          clicks -= autoClicksPrice4;
+          document.getElementById("score").innerHTML = clicks;
+          autoClicksPrice4 = autoClicksPrice4 + 10000;
+          document.getElementById("autoClicksPrice4").innerHTML = "Cost: " + autoClicksPrice4;
+          clicksPerSecond += 10000;
+          document.getElementById("clicksPerSecond").innerHTML = clicksPerSecond;
+        } else {
+          showYouPoorMessage();
+        }
+      }
+      function buySpaceBg() {
+        if (clicks >= spaceBgPrice) {
+          clicks -= spaceBgPrice;
+          document.getElementById("score").innerHTML = clicks;
+          document.getElementById("bigContainer").style.backgroundImage = "url('space-bg.jpg')";
+        } else {
+          showYouPoorMessage();
+        }
+      }
+      function buySunsetBg() {
+        if (clicks >= sunsetBgPrice) {
+          clicks -= sunsetBgPrice;
+          document.getElementById("score").innerHTML = clicks;
+          document.getElementById("bigContainer").style.backgroundImage = "url('sunset.jpg')";
+        } else {
+          showYouPoorMessage();
+        }
+      }
+
+      function openSecretShop() {
+        const shop = document.getElementById("secretShopContainer");
+        shop.style.display = 'flex';
+      }
+      function closeSecretShop() {
+        const shop = document.getElementById("secretShopContainer");
+        shop.style.display = 'none';
+      }
+
+      function prettyNumber(number) {
+        if (number <= 1000) {
+          return number;
+        }
+        if (number >= 1000 && number < 1000000) {
+          return (number / 1000).toFixed(1) + "K";
+        }
+        if (number >= 1000000 && number < 1000000000) {
+          return (number / 1000000).toFixed(1) + "M";
+        }    
+        if (number >= 1000000000 && number < 1000000000000) {
+          return (number / 1000000000).toFixed(1) + "B";
+        }
+        if (number >= 1000000000000) {
+          return (number / 1000000000000).toFixed(1) + "T";
+        }
+      }
+
+      function reset() {
+        if (window.confirm('You sure?')) {
+          if (window.confirm('You sure?')) {
+            if (window.confirm('You sure?')) {
+              setTimeout(function(){
+                window.location.reload(true);
+              },0);
+            }
+          }
+        }
+      }
+
+      setInterval(function() {
+        clicks += clicksPerSecond;
+        if (clicks > clicksForAngry) {
+          document.getElementsByClassName("btn")[0].style.backgroundImage = 'url(Haziwi-angry.png)';
+        }
+        document.getElementById("score").innerHTML = prettyNumber(clicks);
+      }, 1000);
+
+     </script>
+
+<div  id="bigContainer">
+ <div class="container">
+  <div id="scoreContainer">
+    <div>Score:</div>
+   <div id="score">0</div>
+  </div>
+  <div class="scoreTextContainer">
+    <div class="scoreText">vpc: <span id="clickValue">1</span></div>
+    <div class="scoreText"> cps: <span id="clicksPerSecond">0</span></div>
+  </div>
+   
+  <div class="pig">
+     <button class="btn" onClick="onClick()"></button>
+     <audio id="oinkSound">
+        <source src="oink.mp4" type="audio/mp4">
+      </audio>
+  </div>
+  </div>
+
+   
+   <div class= "shop">
+     <button onClick="openShop()" id="shopbtn"><div id="shopbtntext">SHOP</div></button></div>
+   
+     <div id="shopcontainer"> 
+    <button onClick="closeShop()" id="closebtn">X</button>
+    
+      <div id="messageContainer">You poor!</div>
+    <div id="shopitems">
+      <div class="shopitem">
+        <div class="shopitemname">BETTER CLICKS</div>
+        <div class="itemDescription">x4 the clicks</div>
+        <div class="shopitemcost" id="betterClicksPrice">Cost: 50</div>
+        <button class="shopitembtn" id="betterClicks" onClick="buyBetterClicks()">Buy</button>
+      </div>
+      <div class="shopitem">
+        <div class="shopitemname">AUTO CLICKER</div>
+        <div class="itemDescription">+10 cps</div>
+        <div class="shopitemcost" id="autoClicksPrice">Cost: 100</div>
+        <button class="shopitembtn" id="autoClicks" onClick="buyAutoClicks()">Buy</button>
+      </div>
+      <div class="shopitem">
+        <div class="shopitemname">AUTO CLICKER 2</div>
+        <div class="itemDescription">+100  cps</div>
+        <div class="shopitemcost" id="autoClicksPrice2">Cost: 1,000</div>
+        <button class="shopitembtn" id="autoClicks2" onClick="buyAutoClicks2()">Buy</button>
+      </div>
+      <div class="shopitem">
+        <div class="shopitemname">AUTO CLICKER 3</div>
+        <div class="itemDescription">+1,000 cps</div>
+        <div class="shopitemcost" id="autoClicksPrice3">Cost: 10,000</div>
+        <button class="shopitembtn" id="spaceBg" onClick="buyAutoClicks3()">Buy</button>
+      </div>
+      <div class="shopitem">
+        <div class="shopitemname">AUTO CLICKER 4</div>
+        <div class="itemDescription">+10,000 cps</div>
+        <div class="shopitemcost" id="autoClicksPrice4">Cost: 100,000</div>
+        <button class="shopitembtn" id="autoclicks4" onClick="buyAutoClicks4()">Buy</button>
+      </div>
+ 
+   </div>
+    </div>
+  </div>
+  <div id="secretButtonContainer">
+    <button id="secretButton" onclick="openSecretShop()"></button>
+
+  </div>
+  <div id="secretShopContainer">
+    <button id="closeSecretShop" onclick="closeSecretShop()">X</button>
+    <div id="secretShopItems">
+      <div class="shopitem">
+        <div class="shopitemname">SPACE BACKGROUND</div>
+        <div class="shopitemcost" id="spaceBgPrice">Cost: 100</div>
+        <button class="shopitembtn" id="spaceBg" onClick="buySpaceBg()">Buy</button>
+      </div>
+      <div class="shopitem">
+        <div class="shopitemname">SUNSET BACKGROUND</div>
+        <div class="shopitemcost" id="sunsetBgPrice">Cost: 100</div>
+        <button class="shopitembtn" id="sunsetBg" onClick="buySunsetBg()">Buy</button>
+      </div>
+    </div>
+  </div>
+  <div id="resetContainer">
+    <button id="resetButton" onClick="reset()">RESET</button>
+  </div>
+ </body>
+ </html>
